@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HouseHunt</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/signup.css" />
+    <link rel="shortcut icon" href="lightlogo.png" type="image/x-icon" />
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+    <main>
+      <div class="container">
+        <h1>
+          Sign up and start <br />
+          your journey!
+        </h1>
+        
+        <!-- signup form window -->
+        <form
+          action="/signup"
+          method="post"
+          enctype="multipart/form-data"
+          id="signup-window"
+          class="form active"
+        >
+          <div class="one">
+            <label for="id">ID Number</label>
+            <input type="number" name="id" id="id" required />
+          </div>
+          
+          <div class="one">
+            <label for="fullname">Fullname</label>
+            <input type="text" name="fullname" id="fullname" required />
+          </div>
+
+          <div class="one">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required />
+          </div>
+
+          <div class="one">
+            <label for="contact">Contact</label>
+            <input type="tel" name="contact" id="contact" required />
+          </div>
+
+          <div class="one">
+            <label for="role">Role</label>
+            <select name="role" id="find-role">
+              <option value="none">Select Role</option>
+              <option value="client">Client</option>
+              <option value="owner">Owner</option>
+              <option value="agent">Agent</option>
+            </select>
+          </div>
+
+          <!-- conditional credentials shown after someone selects a role -->
+          <div id="agency-field" style="display: none" class="one">
+            <div class="three">
+              <label for="agency">Agency</label>
+              <input type="text" name="agency" id="agency" />
+            </div>
+          </div>
+
+          <div id="address-field" style="display: none" class="one">
+            <div class="three">
+              <label for="address">Address</label>
+              <input type="text" name="address" id="address" />
+            </div>
+          </div>
+
+          <div id="businessname-field" style="display: none" class="one">
+            <div class="three">
+              <label for="businessname">Business Name</label>
+              <input type="text" name="businessname" id="businessname" />
+            </div>
+          </div>
+
+          <!-- passwords -->
+          <div class="one">
+            <label for="password">Password </label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <div class="one">
+            <label for="confirm">Confirm Password</label>
+            <input type="password" name="confirm" id="confirm" required />
+            <p id="password-error"></p>
+          </div>
+
+          <div id="profile-field" style="display: none">
+            <label for="profile">Upload Profile Picture</label>
+            <input type="file" name="profile" id="profile" />
+          </div>
+
+          <div class="two">
+            <input type="submit" value="Signup" class="button" />
+          </div>
+
+          <p>Already have an account?<a href="/login">Login</a></p>
+        </form>
+      </div>
+      <!-- container that holds the login and signup form -->
+    </main>
+    <%- include('partials/footer.ejs') %>
+    <script src="signup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+body{
+    background-color: #f8f4e1;
+    color: #543310;
+}
+.container{
+    text-align: center;
+    background-color: white;
+    padding: 150px;
+    width: 30%;
+    margin:40px auto;
+    box-shadow: 0 4px 10px #74512d;
+}
+.name{
+    font-size: xx-large;
+    text-align: center;
+}
+h1,p{
+    margin: 20px auto;
+}
+.container a{
+    text-decoration: none;
+    background-color: #543310;
+    color: white;
+    font-weight: 700;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    top: 30px;
+    
+}

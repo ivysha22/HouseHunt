@@ -1,0 +1,63 @@
+body{
+    background-color:#f8f4e1 ;
+}
+.container h1{
+    text-align: center;
+    margin-top: 60px;
+    font-size: 2.5rem;
+    color: #4e3627;
+}
+.container p{
+    line-height: 1.6;
+    text-align: center;
+    margin: 10px auto;
+    max-width: 600px;
+    font-size: 1.2rem;
+}
+.mission li{
+    margin-left: 30%;
+    font-size: 1.2rem;
+    
+}
+ .step{
+    background-color: #4e3627;
+    padding: 20px 0;
+    border-radius: 30px;
+ }
+ .step h3{
+    text-align: center;
+    font-size: 25px;
+    color: #f8f4e1;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+ }
+.steps{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-gap: 20px; /* Space between the divs */
+    margin:40px 50px;
+    
+}
+.testimonials_container img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Ensures the image fills the circle area */
+    align-self: center;
+    border-radius: 100%;
+}
+.testimonials_container span{
+    text-align: center;
+}
+.testimonials_container{
+    display: flex;
+    margin: 50px 40px;
+    gap: 20px;
+}
+.one{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 60px 30px;
+    gap: 10px;
+    box-shadow: #4e3627 0px 0px 10px;
+}

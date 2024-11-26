@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HouseHunt</title>
+    <link
+      rel="shortcut icon"
+      href="/images/favicon-16x16.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/listings.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+    <main>
+      <div class="filter-container">
+        <i
+          class="fa-solid fa-filter"
+          style="
+            color: #4e3627;
+            display: flex;
+            gap: 10px;
+            margin-left: 50px;
+            margin-bottom: 20px;
+          "
+          >Search Filter</i
+        >
+
+        <form action="/listings" method="post">
+          <div class="price">
+            <h2>Price</h2>
+            <input
+              type="number"
+              name="min-price"
+              id="min-price"
+              placeholder="min"
+              class="maxmin"
+            />
+            <input
+              type="number"
+              name="max-price"
+              id="max-price"
+              placeholder="max"
+              class="maxmin"
+            />
+            
+          </div>
+<div class="inputs">
+          <div class="location">
+            <h2>Location</h2>
+            <input type="text" name="location" id="location" placeholder="
+            794, Pioneer Eldoret" />
+          </div>
+
+          <div class="property">
+            <h2>Property Type</h2>
+            <select name="property" id="property">
+              <option value="any">Any</option>
+              <option value="studio">Studio</option>
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="condo">Condo</option>
+              <option value="townhouse">Townhouse</option>
+            </select>
+          </div>
+          <!-- end of property type div -->
+
+          <div class="bedrooms">
+            <h2>Bedrooms</h2>
+            <select name="beds" id="beds">
+              <option value="any">Any</option>
+              <option value="bedsitter">Bedsitter</option>
+              <option value="one-bed">1-Bedroom</option>
+              <option value="two-bed">2-Bedroom</option>
+              <option value="three-bed">3-Bedroom</option>
+            </select>
+          </div>
+          <!-- end of bedrooms div -->
+</div>
+          <div class="outdoors">
+            <h2>Outdoor Features</h2>
+            <div class="outdoor">
+              <input type="checkbox" name="garden" id="garden" />
+              <p>Garden</p>
+            </div>
+
+            <div class="outdoor">
+              <input type="checkbox" name="swimming" id="swimming" />
+              <p>Swimming</p>
+            </div>
+
+            <div class="outdoor">
+              <input type="checkbox" name="backyard" id="backyard" />
+              <p>Backyard</p>
+            </div>
+
+            <div class="outdoor">
+              <input type="checkbox" name="balcony" id="balcony" />
+              <p>Balcony</p>
+            </div>
+          </div>
+
+          <div class="amenities">
+            <h2>Amenities</h2>
+            <div class="amen">
+              <input type="checkbox" name="gym" id="gym" />
+              <p>Gym</p>
+            </div>
+
+            <div class="amen">
+              <input type="checkbox" name="parking" id="parking" />
+              <p>Parking</p>
+            </div>
+
+            <div class="amen">
+              <input type="checkbox" name="housekeeping" id="housekeeping" />
+              <p>HouseKeeping</p>
+            </div>
+
+            <div class="amen">
+              <input type="checkbox" name="elevator" id="elevator" />
+              <p>Elevetor</p>
+            </div>
+
+            <div class="amen">
+              <input type="checkbox" name="pet-friendly" id="pet-friendly" />
+              <p>Pet-Friendly</p>
+            </div>
+            <input type="submit" value="Apply" id="submit" />
+          </div>
+        </form>
+      </div>
+    </main>
+    <%- include('partials/footer.ejs') %>
+  </body>
+</html>

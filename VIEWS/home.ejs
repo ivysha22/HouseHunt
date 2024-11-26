@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HouseHunt</title>
+    <link
+      rel="shortcut icon"
+      href="/images/favicon-16x16.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+    <main>
+      <section class="welcome_page">
+        <div id="menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <video autoplay muted loop class="background-video">
+          <source
+            src="/images/hero background video (1).mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div class="hero">
+          <h1>Find Your Dream Home With HouseHunt</h1>
+          <p>Search and browse homes that fit your budget and preferences.</p>
+        </div>
+      </section>
+
+      <section class="popular-listings">
+        <h1>Popular Listings</h1>
+        <h2>Discover the most viewed homes</h2>
+        <div class="container">
+          <div class="list">
+            <!-- property one -->
+
+            <div class="images-grid">
+              <img src="/images/bathroom1.jpg" alt="" />
+              <img src="/images/swimming1.jpg" alt="" />
+              <img src="/images/kitchen1.jpg" alt="" />
+              <img src="/images/staircase1.webp" alt="" />
+            </div>
+            <p class="badge">Most Viewed</p>
+            <h3>Modern 3-Bedroom Home with Stylish Finishes</h3>
+            <p><b>Location</b>:Kaspsoya,Eldoret</p>
+            <p><b>Price</b>:KES 20,000,000</p>
+          </div>
+
+          <div class="list">
+            <!-- property two -->
+            <div class="images-grid">
+              <img src="/images/staircase2.webp" alt="" />
+              <img src="/images/gym1.jpg" alt="" />
+              <img src="/images/view1.jpg" alt="" />
+              <img src="/images/bathroom2.jpeg" alt="" />
+            </div>
+            <h3>Luxurious 2-Bedroom Condo with Breathtaking Views</h3>
+            <p><b>Location</b>:Pioneer,Eldoret</p>
+            <p><b>Price</b>:KES 15,000,000</p>
+          </div>
+
+          <div class="list">
+            <!-- property three -->
+            <div class="images-grid">
+              <img src="/images/kitchen2.jpg" alt="" />
+              <img src="/images/gym2.jfif" alt="" />
+              <img src="/images/swimming2.jpg" alt="" />
+              <img src="/images/living room.jpg" alt="" />
+            </div>
+            <h3>Stylish 2-Bedroom Condo with Modern Amenities</h3>
+            <p><b>Location</b>:Elgon View,Eldoret</p>
+            <p><b>Price</b>:KES 18,000,000</p>
+          </div>
+
+          <div class="list">
+            <!-- property four -->
+            <div class="images-grid">
+              <img src="/images/kitchen3.jpg" alt="" />
+              <img src="/images/bathroom3.webp" alt="" />
+              <img src="/images/staircase3.jfif" alt="" />
+              <img src="/images/livingroom2.jpeg" alt="" />
+            </div>
+            <h3>Contemporary 1-Bedroom Home in a Prime Location</h3>
+            <p><b>Location</b>:Annex,Eldoret</p>
+            <p><b>Price</b>:KES 5,000,000</p>
+          </div>
+
+          <div class="list">
+            <!-- property five -->
+            <div class="images-grid">
+              <img src="/images/garden3.jpg" alt="" />
+              <img src="/images/staircase4.avif" alt="" />
+              <img src="/images/kitchen4.jpg" alt="" />
+              <img src="/images/bathroom4.jfif" alt="" />
+            </div>
+            <h3>Stylish 3-Bedroom House with Private Garden</h3>
+            <p><b>Location</b>:Pioneer,Eldoret</p>
+            <p><b>Price</b>:KES 25,000,000</p>
+          </div>
+
+          <div class="list">
+            <!-- property six -->
+            <div class="images-grid">
+              <img src="/images/bathroom5.webp" alt="" />
+              <img src="/images/staircase5.jfif" alt="" />
+              <img src="/images/outdoor.jpg" alt="" />
+              <img src="/images/livingroom3.jpg" alt="" />
+            </div>
+            <h3>Sleek 1-Bedroom Apartment with Outdoor Amenities</h3>
+            <p><b>Location</b>:Outspan,Eldoret</p>
+            <p><b>Price</b>:KES 1,000,000</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY CHOOSE US SECTION -->
+
+      <section class="why-us">
+        <h1>
+          Why Choose Us?
+          <img
+            src="/images/lightbulb-removebg-preview.png"
+            alt="image of a lit bulb showing idea"
+            id="bulb"
+          />
+        </h1>
+        <div class="container2">
+          <div class="image">
+            <img src="/images/why us.jpg" alt="realtor infront of sold house" />
+          </div>
+
+          <div class="text">
+            <div class="idea">
+              <span class="one">Trusted Agents</span>
+              <span class="two">Verified Listings</span>
+              <span class="two">Seamless Communication</span>
+              <span class="one">Local Expertise</span>
+            </div>
+
+            <div class="socials">
+              <p><b>For More Info:</b></p>
+              <div class="socials2">
+                <span><i class="fa-solid fa-phone-volume"></i></span>
+                <span>0719250361</span>
+              </div>
+
+              <div class="socials2">
+                <span><i class="fa-solid fa-envelope"></i></span>
+                <span>info@househunt.com</span>
+              </div>
+              <!-- socials2 div end -->
+            </div>
+            <!-- socials div end -->
+          </div>
+          <!-- text div end -->
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer.ejs') %>
+    <script src="/index.js"></script>
+  </body>
+</html>

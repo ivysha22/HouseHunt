@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/owner.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- style section -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #f5e2ce;
+      }
+      main {
+        display: flex;
+        gap: 100px;
+      }
+      header {
+        background-color: #f5e2ce;
+      }
+      header nav {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+      }
+
+      .dashboardlist {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        white-space: nowrap;
+      }
+      header img {
+        padding: 15px; /* Add padding around the image */
+        display: block; /* Make the image a block element for better alignment */
+        width: 150px; /* Set a specific width for the image */
+      }
+      #home {
+        text-decoration: none;
+        color: black;
+        font-size: 1.5rem;
+      }
+      #dash {
+        white-space: nowrap;
+        text-decoration: none;
+        color: black;
+        font-size: 1.5rem;
+      }
+      #list {
+        text-decoration: none;
+        font-size: 1.5rem;
+        background-color: #f8f4e1;
+        color: black;
+        font-weight: 600;
+        padding: 10px 40px;
+        border-radius: 20px;
+      }
+      /* sidenav styles */
+      .sidenav {
+        width: 250px; /* Specify the overall width of the sidenav */
+        background-color: white; /* Background color for the entire sidenav */
+        padding: 10px; /* Padding inside the sidenav */
+      }
+
+      .sidenav a {
+        background-color: #f5e2ce; /* Background color for individual sections */
+        margin: 10px 0; /* Space between sections */
+        padding: 30px 15px; /* Space inside each section */
+        border-radius: 8px; /* Rounded corners */
+        text-align: center; /* Center align the text and icons */
+        width: 220px; /* Specific width for the divs */
+        text-decoration: none; /* Remove underline from links */
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        color: #543310;
+      }
+
+      .sidenav a:hover {
+        background-color: #74512d; /* Background color on hover */
+        cursor: pointer; /* Change cursor to pointer */
+      }
+
+      .sidenav i {
+        font-size: 24px; /* Adjust icon size */
+      }
+
+      .sidenav span {
+        position: relative;
+        top: 20px;
+      }
+
+      hr {
+        color: rgb(187, 181, 181);
+      }
+      main {
+        display: flex;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        gap: 12%;
+      }
+      .main-view img {
+        width: 20%;
+      }
+      /* new property main section */
+      .newproperty-section {
+        margin: 0 100px;
+        background-color: #f8f4e1;
+        padding: 30px;
+        border-radius: 10px;
+      }
+
+      .addnew {
+        background-color: #af8f6f;
+        padding: 80px;
+        border-radius: 10px;
+        max-width: 800px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .newproperty-section h1 {
+        text-align: center;
+        color: #f8f4e1;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #74512d;
+        border-radius: 5px;
+      }
+
+      input[type="checkbox"] {
+        width: auto;
+        margin-right: 5px;
+      }
+
+      .outdoor,
+      .amen {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      button {
+        background-color: #543310;
+        color: #f8f4e1;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #74512d;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .newproperty-section {
+          padding: 15px;
+        }
+        button {
+          font-size: 1rem;
+        }
+      }
+    </style>
+    <!-- header section -->
+    <header>
+      <nav>
+        <img
+          src="/images/HouseHunt-removebg-preview.png"
+          alt=""
+          style="background-color: white; padding: 0 60px"
+        />
+        <div class="dashboardlist">
+          <a href="/" id="home">Home Page</a>
+          <a href="/account" id="dash">Dashboard</a>
+          <a href="/addnewproperty" id="list">Add New Property</a>
+          <a href="/myproperties" id="list">My Properties</a>
+
+          <a href="/profile">
+            <% if (!locals.user.PROFILE) { %>
+            <img src="/profilepic/avatarr.png" style="width: 80px" />
+            <% } else { %>
+            <img
+              src="profilepic/<%=locals.user.PROFILE %>"
+              style="width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              object-fit: cover;
+              text-align: center;"
+            />
+            <% } %>
+          </a>
+
+          <div class="greetings">
+            <ul>
+              <li style="list-style: none; font-size: 1.5rem; color: black">
+                Hi&nbsp;<%=locals.user.fullname %><i
+                  class="fa-regular fa-face-smile-beam"
+                  style="color: black; margin-left: 10px"
+                ></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="sidenav">
+        <a href="/account">
+          <i class="fa-solid fa-chart-line" style="color: #000000"></i>
+          Dashboard
+        </a>
+
+        <hr />
+
+        <a href="/profile">
+          <p>
+            <% if (!locals.user.PROFILE) { %>
+            <img src="/profilepic/avatarr.png" style="width: 80px" />
+            <% } else { %>
+            <img
+              src="profilepic/<%=locals.user.PROFILE %>"
+              style="
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+                text-align: center;
+              "
+            />
+            <% } %>
+          </p>
+          <span>Profile</span>
+        </a>
+
+        <hr />
+
+        <a href="/addnewproperty">
+          <i class="fa-solid fa-plus" style="color: black"></i>
+          <span>Add New Property</span>
+        </a>
+
+        <hr />
+
+        <a href="/myproperties">
+          <i class="fa-solid fa-boxes-stacked" style="color: black"></i>
+          <span>My Properties</span>
+        </a>
+
+        <hr />
+
+        <a href="/logout">
+          <i class="fa-solid fa-right-from-bracket" style="color: black"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+      <!-- end of sidenav -->
+
+      <section>
+        <div class="newproperty-section">
+          <div class="addnew">
+            <h1>Add New Properties</h1>
+            <form
+              action="/addnewproperty"
+              method="post"
+              enctype="multipart/form-data"
+              id="addNewproperty"
+            >
+              <% if (locals.Updatesuccess) { %>
+              <div
+                style="
+                  color: rgb(36, 218, 36);
+                  text-align: center;
+                  margin-top: 20px;
+                "
+              >
+                <%= Updatesuccess %>
+              </div>
+              <% } %>
+              <div>
+                <label for="myAgent">Agent</label>
+                <select name="myAgent" id="myAgent">
+                  <% data.forEach(myAgent => { %>
+                  <option value="<%= myAgent.agents_id %>">
+                    <%= myAgent.fullname %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div>
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" />
+              </div>
+
+              <div>
+                <label for="propertyname">Property Name:</label>
+                <input type="text" name="propertyname" id="property_name" />
+              </div>
+
+              <div>
+                <label for="propertyaddress">Property Address:</label>
+                <input
+                  type="text"
+                  name="propertyaddress"
+                  id="property_address"
+                />
+              </div>
+
+              <div>
+                <label for="propertytype">Property Type</label>
+                <select name="propertytype" id="property">
+                  <option value="studio">Studio</option>
+                  <option value="house">House</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="condo">Condo</option>
+                  <option value="townhouse">Townhouse</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="bedrooms">Bedrooms</label>
+                <select name="beds" id="beds">
+                  <option value="bedsitter">Bedsitter</option>
+                  <option value="1">1-Bedroom</option>
+                  <option value="2">2-Bedroom</option>
+                  <option value="3">3-Bedroom</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="outdoorfeatures">Outdoor Features</label>
+                <div class="outdoor">
+                  <input type="checkbox" name="garden" id="garden" />
+                  <p>Garden</p>
+                </div>
+
+                <div class="outdoor">
+                  <input type="checkbox" name="swimming" id="swimming" />
+                  <p>Swimming</p>
+                </div>
+
+                <div class="outdoor">
+                  <input type="checkbox" name="backyard" id="backyard" />
+                  <p>Backyard</p>
+                </div>
+
+                <div class="outdoor">
+                  <input type="checkbox" name="balcony" id="balcony" />
+                  <p>Balcony</p>
+                </div>
+              </div>
+
+              <div>
+                <label for="amenities">Amenities</label>
+                <div class="amen">
+                  <input type="checkbox" name="gym" id="gym" />
+                  <p>Gym</p>
+                </div>
+
+                <div class="amen">
+                  <input type="checkbox" name="parking" id="parking" />
+                  <p>Parking</p>
+                </div>
+
+                <div class="amen">
+                  <input
+                    type="checkbox"
+                    name="housekeeping"
+                    id="housekeeping"
+                  />
+                  <p>HouseKeeping</p>
+                </div>
+
+                <div class="amen">
+                  <input type="checkbox" name="elevator" id="elevator" />
+                  <p>Elevetor</p>
+                </div>
+
+                <div class="amen">
+                  <input
+                    type="checkbox"
+                    name="pet-friendly"
+                    id="pet-friendly"
+                  />
+                  <p>Pet-Friendly</p>
+                </div>
+              </div>
+
+              <div id="upload-field">
+                <label for="images">Upload Listings Images</label>
+                <input
+                  type="file"
+                  name="uploadimages"
+                  id="uploadimages"
+                  multiple
+                />
+              </div>
+
+              <button type="submit">Add Property</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

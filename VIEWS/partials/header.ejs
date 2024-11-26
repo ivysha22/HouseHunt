@@ -1,0 +1,19 @@
+<header>
+  <nav class="logo">
+    <div class="image1">
+      <img src="/images/hh_logo-removebg-preview.png" alt="" />
+    </div>
+    <!-- househunt image logo -->
+
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/listings">Listings</a>
+      <%if(locals.isLoggedIn){%>
+        <a href="/account" id="dash">Dashboard</a>
+        <%}%>
+      <a href="/contact">Contact Us</a>
+      <a href="/signup" class="cta-link" id="black">Get Started</a>
+    </div>
+  </nav>
+</header>

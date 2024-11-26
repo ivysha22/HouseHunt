@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HouseHunt</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/result.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    
+</head>
+<body>
+<%- include('partials/header.ejs') %>
+<div class="container">
+  <h1>Thank You!!!</h1>
+  <p class="name"><%= name %></p>
+  <p>We have received your message and will get back to you shortly.</p>
+  <a href="/">Go back to the homepage</a>
+</div>
+
+<%- include('partials/footer.ejs') %>
+</body>
+</html>

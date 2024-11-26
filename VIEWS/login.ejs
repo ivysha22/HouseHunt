@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HouseHunt</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/login.css" />
+    <link rel="shortcut icon" href="lightlogo.png" type="image/x-icon" />
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+    <main>
+      <% if (locals.success) { %>
+      <div class="success-message" id="success-message">
+        <h2>signup successs login</h2>
+      </div>
+      <% } %>
+
+      <div class="container">
+        <h1>Welcome Back to HouseHunt</h1>
+        <!-- login form window -->
+        <form action="/login" method="post" id="login-window" class="form">
+          <!-- login post route -->
+          <% if (LoginError) { %>
+          <div style="color: red; text-align: center; margin-top: 20px">
+            <%= LoginError %>
+          </div>
+          <% } %>
+
+          <div class="one">
+            <label for="loginemail">Email</label>
+            <input type="email" name="loginemail" id="loginemail" required />
+          </div>
+
+          <div class="one">
+            <label for="pass">Password</label>
+            <input type="password" name="pass" id="pass" required />
+          </div>
+
+          <div class="one">
+            <label for="role">Role</label>
+            <select name="role" id="role">
+              <option value="admin">Admin</option>
+              <option value="agent">Agent</option>
+              <option value="client">Client</option>
+              <option value="owner">Owner</option>
+            </select>
+          </div>
+
+          <div class="two">
+            <input type="submit" value="Login" class="button" />
+          </div>
+
+          <p>Don't have an account yet?<a href="/signup">Signup</a></p>
+        </form>
+        <!-- login form -->
+      </div>
+    </main>
+    <script src="/login.js"></script>
+
+    <%- include('partials/footer.ejs') %>
+  </body>
+</html>

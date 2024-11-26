@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/owner.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- style section -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #f5e2ce;
+      }
+      main {
+        display: flex;
+        gap: 100px;
+      }
+      header {
+        background-color: #f5e2ce;
+      }
+      header nav {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+      }
+
+      .dashboardlist {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        white-space: nowrap;
+      }
+      header img {
+        padding: 15px; /* Add padding around the image */
+        display: block; /* Make the image a block element for better alignment */
+        width: 150px; /* Set a specific width for the image */
+      }
+      #home {
+        text-decoration: none;
+        color: black;
+        font-size: 1.5rem;
+      }
+      #dash {
+        white-space: nowrap;
+        text-decoration: none;
+        color: black;
+        font-size: 1.5rem;
+      }
+      #list {
+        text-decoration: none;
+        font-size: 1.5rem;
+        background-color: #f8f4e1;
+        color: black;
+        font-weight: 600;
+        padding: 10px 40px;
+        border-radius: 20px;
+      }
+      /* sidenav styles */
+      .sidenav {
+        width: 250px; /* Specify the overall width of the sidenav */
+        background-color: white; /* Background color for the entire sidenav */
+        padding: 10px; /* Padding inside the sidenav */
+      }
+
+      .sidenav a {
+        background-color: #f5e2ce; /* Background color for individual sections */
+        margin: 10px 0; /* Space between sections */
+        padding: 30px 15px; /* Space inside each section */
+        border-radius: 8px; /* Rounded corners */
+        text-align: center; /* Center align the text and icons */
+        width: 220px; /* Specific width for the divs */
+        text-decoration: none; /* Remove underline from links */
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        color: #543310;
+      }
+
+      .sidenav a:hover {
+        background-color: #74512d; /* Background color on hover */
+        cursor: pointer; /* Change cursor to pointer */
+      }
+
+      .sidenav i {
+        font-size: 24px; /* Adjust icon size */
+      }
+
+      .sidenav span {
+        position: relative;
+        top: 20px;
+      }
+      hr {
+        color: rgb(187, 181, 181);
+      }
+      main {
+        display: flex;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        gap: 12%;
+      }
+      .main-view img {
+        width: 20%;
+      }
+    </style>
+    <!-- header section -->
+    <header>
+      <nav>
+        <img
+          src="/images/HouseHunt-removebg-preview.png"
+          alt=""
+          style="background-color: white; padding: 0 60px"
+        />
+        <div class="dashboardlist">
+          <a href="/" id="home">Home Page</a>
+          <a href="/account" id="dash">Dashboard</a>
+          <a href="/addnewproperty" id="list">Add New Property</a>
+          <a href="/myproperties" id="list">My Properties</a>
+
+          <a href="/profile">
+            <% if (!locals.user.PROFILE) { %>
+            <img src="/profilepic/avatarr.png" style="width: 80px" />
+            <% } else { %>
+            <img
+              src="profilepic/<%=locals.user.PROFILE %>"
+              style="width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              object-fit: cover;
+              text-align: center;"
+            />
+            <% } %>
+          </a>
+
+          <div class="greetings">
+            <ul>
+              <li style="list-style: none; font-size: 1.5rem; color: black">
+                Hi&nbsp;<%=locals.user.fullname %><i
+                  class="fa-regular fa-face-smile-beam"
+                  style="color: black; margin-left: 10px"
+                ></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="sidenav">
+        <a href="/account">
+          <i class="fa-solid fa-chart-line" style="color: #000000"></i>
+          Dashboard
+        </a>
+
+        <hr />
+
+        <a href="/profile">
+          <p>
+            <% if (!locals.user.PROFILE) { %>
+            <img src="/profilepic/avatarr.png" style="width: 80px" />
+            <% } else { %>
+            <img
+              src="profilepic/<%=locals.user.PROFILE %>"
+              style="
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+                text-align: center;
+              "
+            />
+            <% } %>
+          </p>
+          <span>Profile</span>
+        </a>
+
+        <hr />
+
+        <a href="/addnewproperty">
+          <i class="fa-solid fa-plus" style="color: black"></i>
+          <span>Add New Property</span>
+        </a>
+
+        <hr />
+
+        <a href="/myproperties">
+          <i class="fa-solid fa-boxes-stacked" style="color: black"></i>
+          <span>My Properties</span>
+        </a>
+
+        <hr />
+
+        <a href="/logout">
+          <i class="fa-solid fa-right-from-bracket" style="color: black"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+      <!-- end of sidenav -->
+
+      <section>
+        <div>
+          <% if (uploadimages && uploadimages.length > 0) { %>
+            <% uploadimages.forEach(function(image) { %>
+              <div>
+                <img src="<%= image %>" alt="Uploaded Image" style="width: 200px; height: auto;">
+              </div>
+            <% }); %>
+          <% } else { %>
+            <p>No images uploaded yet.</p>
+          <% } %>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

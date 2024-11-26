@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #f5e2ce;
+}
+main {
+  display: flex;
+  gap: 100px;
+}
+header {
+  background-color: #f5e2ce;
+}
+header nav {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.dashboardlist {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  white-space: nowrap;
+}
+header img {
+  padding: 15px; /* Add padding around the image */
+  display: block; /* Make the image a block element for better alignment */
+  width: 150px; /* Set a specific width for the image */
+}
+#home {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+#dash {
+  white-space: nowrap;
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+#list {
+  text-decoration: none;
+  font-size: 1.5rem;
+  background-color: #f8f4e1;
+  color: black;
+  font-weight: 600;
+  padding: 10px 40px;
+  border-radius: 20px;
+}
+/* sidenav styles */
+.sidenav {
+  width: 250px; /* Specify the overall width of the sidenav */
+  background-color: white; /* Background color for the entire sidenav */
+  padding: 10px; /* Padding inside the sidenav */
+}
+
+.sidenav a {
+  background-color: #f5e2ce; /* Background color for individual sections */
+  margin: 10px 0; /* Space between sections */
+  padding: 30px 15px; /* Space inside each section */
+  border-radius: 8px; /* Rounded corners */
+  text-align: center; /* Center align the text and icons */
+  width: 220px; /* Specific width for the divs */
+  text-decoration: none; /* Remove underline from links */
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #543310;
+}
+
+.sidenav a:hover {
+  background-color: #74512d; /* Background color on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.sidenav i {
+  font-size: 24px; /* Adjust icon size */
+}
+
+.sidenav span {
+  position: relative;
+  top: 20px;
+}
+hr {
+  color: rgb(187, 181, 181);
+}
+main {
+  display: flex;
+  font-family: Arial, sans-serif;
+  gap: 18%;
+}
+.main-view img {
+  width: 20%;
+}
+/* Dashboard Section */
+.main-view {
+  margin: 80px auto;
+  background-color: #f8f4e1;
+  padding: 30px;
+  border-radius: 10px;
+}
+#dashboard {
+  width: 40vw;
+}
+#dash-content {
+  display: flex;
+  align-items: center;
+  background-color: #af8f6f;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#dash-content img {
+  width: 40%;
+  border-radius: 8px;
+}
+
+.text h1 {
+  font-size: 2rem;
+  color: #331d06;
+  margin: 0;
+}
+
+.text h2 {
+  font-size: 1.2rem;
+  color: #74512d;
+  margin: 5px 0 0 0;
+}

@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+/* header section */
+header nav {
+  /* the whole navigation  bar */
+  display: flex;
+  background-color: #4e3627;
+  align-items: center;
+  height: auto;
+  padding: 10px auto;
+}
+header img {
+  width: 13%;
+}
+header .links {
+  display: flex;
+  gap: 50px;
+  margin-right: 10%;
+  align-items: center;
+}
+header .links a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  flex: 1;
+  white-space: nowrap; /* helps so that the contact us doesnt  go to the next line */
+  color: white;
+}
+#black {
+  color: black;
+  font-weight: 800;
+}
+header .links a:hover {
+  transition: all 0.3s ease-in-out;
+  color: black; /* Complementary color */
+  font-weight: 900;
+}
+header .links button {
+  border: none;
+}
+header .cta-link {
+  background-color: #af8f6f;
+  padding: 8px 50px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  left: 100px;
+}
+.cta-link:hover {
+  transform: scale(1.15);
+  color: black;
+  border: solid black 2px;
+}
+
+/* footer section */
+footer {
+  background-color: #4e3627;
+  color: white;
+  margin-bottom: 0;
+}
+.footer-child {
+  display: flex;
+  margin-top: 80px;
+  gap: 10px;
+}
+.image1 img {
+  width: 30%;
+}
+footer .links {
+  display: flex;
+  gap: 130px;
+  color: black;
+}
+.foot {
+  display: block;
+}
+.foot a:hover {
+  color: #f7d2c4;
+  transition: all 0.3s ease-in-out;
+}
+.links {
+  margin: 30px 0;
+}
+.links a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+}
+.links i {
+  color: white;
+}
+.links li {
+  list-style: none;
+  margin-top: 10px;
+}
+.foot-socials {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 10px;
+}
+.foot-socials i:hover {
+  color: #f7d2c4;
+  transition: all 0.3s ease-in-out;
+}
+.reserved {
+  text-align: center;
+}
+#menu-btn {
+  display: none;
+}
+@media (max-width: 780px) {
+  header {
+    flex-grow: 1;
+    width: 100vw;
+  }
+  .cta-link {
+    margin-right: 50px;
+  }
+  .logo .image1 {
+    width: 50%;
+    margin: 0;
+  }
+  .logo .image1 img {
+    width: 80%;
+  }
+  .footer-child .image1 {
+    width: 20%;
+    margin: 0;
+  }
+  .footer-child .image1 img {
+    width: 80%;
+    margin: 20px auto;
+  }
+  .footer-child .links {
+    width: 80%;
+    gap: 30px;
+  }
+  .foot-socials {
+    gap: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .logo .image1 {
+    display: none;
+  }
+  nav .links {
+    display: none;
+  }
+  .footer-child .image1 {
+    width: 8%;
+  }
+  .footer-child img {
+    display: none;
+  }
+  .foot-socials {
+    display: block;
+  }
+}
+@media (max-width: 320px) {
+  #menu-btn {
+    position: relative;
+    bottom: 20%;
+    margin: 0%;
+  }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/owner.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- header section -->
+    <header>
+      <nav>
+        <img
+          src="/images/HouseHunt-removebg-preview.png"
+          alt=""
+          style="background-color: white; padding: 0 60px"
+        />
+        <div class="dashboardlist">
+          <a href="/" id="home">Home Page</a>
+          <a href="/account" id="dash">Dashboard</a>
+          <a href="/addnewproperty" id="list">Add New Property</a>
+          <a href="/myproperties" id="list">My Properties</a>
+
+          <a href="/profile">
+           
+            <% if (!locals.user.PROFILE) { %>
+            <img src="/profilepic/avatarr.png" style="width: 80px" />
+            <% } else { %>
+            <img
+              src="profilepic/<%=locals.user.PROFILE %>"
+              style="width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              object-fit: cover;
+              text-align: center;"
+            />
+            <% } %>
+          </a>
+
+          <div class="greetings">
+            <ul>
+              <li style="list-style: none; font-size: 1.5rem; color: black">
+                Hi&nbsp;<%=locals.user.fullname %><i
+                  class="fa-regular fa-face-smile-beam"
+                  style="color: black; margin-left: 10px"
+                ></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="sidenav">
+        <a href="/account">
+          <i class="fa-solid fa-chart-line" style="color: #000000"></i>
+          Dashboard
+        </a>
+
+        <hr />
+
+        <a href="/profile">
+          <p>
+            <% if (!locals.user.PROFILE) { %>
+            <img src="/profilepic/avatarr.png" style="width: 80px" />
+            <% } else { %>
+            <img
+              src="profilepic/<%=locals.user.PROFILE %>"
+              style="
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+                text-align: center;
+              "
+            />
+            <% } %>
+          </p>
+          <span>Profile</span>
+        </a>
+
+        <hr />
+
+        <a href="/addnewproperty">
+          <i class="fa-solid fa-plus" style="color: black"></i>
+          <span>Add New Property</span>
+        </a>
+
+        <hr />
+
+        <a href="/myproperties">
+          <i class="fa-solid fa-boxes-stacked" style="color: black"></i>
+          <span>My Properties</span>
+        </a>
+
+        <hr />
+
+        <a href="/logout">
+          <i class="fa-solid fa-right-from-bracket" style="color: black"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+
+      <section>
+        <div class="main-view">
+          <div id="dashboard">
+            <div id="dash-content">
+              <img src="images/littlekid.png" alt="" />
+              <div class="text">
+                <h1>Welcome Back!!!!!</h1>
+                <h2>Personalize your Dashboard</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
