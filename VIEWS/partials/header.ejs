@@ -6,14 +6,20 @@
     <!-- househunt image logo -->
 
     <div class="links">
+      <%if(locals.isLoggedIn){%>
       <a href="/">Home</a>
       <a href="/about">About Us</a>
       <a href="/listings">Listings</a>
-      <%if(locals.isLoggedIn){%>
-        <a href="/account" id="dash">Dashboard</a>
-        <%}%>
+      <a href="/account" id="dash">Dashboard</a>
+      <a href="/logout">Logout</a>
+      <%}else{%>
+
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/listings">Listings</a>
       <a href="/contact">Contact Us</a>
       <a href="/signup" class="cta-link" id="black">Get Started</a>
+      <%}%>
     </div>
   </nav>
 </header>

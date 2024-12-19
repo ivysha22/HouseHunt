@@ -10,7 +10,7 @@ const { Agent } = require("http");
 const multer = require("multer");
 const upload = multer({ dest: "public/listingimages" });
 const profile = multer({ dest: "public/profilepic" });
-require('dotenv').config()
+require("dotenv").config();
 // Import MySQL
 const connection = mysql.createConnection({
   host: "localhost",
@@ -81,25 +81,149 @@ server.use(express.urlencoded({ extended: true }));
 
 // Home route
 server.get("/", (req, res) => {
-  console.log("home/root/index/landing page");
   res.render("home.ejs");
 });
 
 // about route
 server.get("/about", (req, res) => {
-  console.log("about page");
   res.render("about.ejs");
 });
 
-// listings route
 server.get("/listings", (req, res) => {
-  console.log("listings page");
-  res.render("listings.ejs");
+  if (Object.keys(req.query).length === 0) {
+    let sql = "SELECT * FROM listings WHERE price>10000 AND price<50000";
+    connection.query(sql, (err, result) => {
+      if (err) {
+        return res.status(500).render("500.ejs");
+      } else {
+        res.render("listings.ejs", {
+          filtered: result,
+          outdoorFeatures: "",
+          amenities: "",
+          listingImages: [],
+        });
+      }
+    });
+  } else {
+    const {
+      minPrice,
+      maxPrice,
+      location,
+      property,
+      beds,
+      garden,
+      swimming,
+      backyard,
+      balcony,
+      gym,
+      parking,
+      housekeeping,
+      elevator,
+      petFriendly,
+    } = req.query;
+
+    const outdoorFeatures = [
+      garden && "Garden",
+      swimming && "Swimming",
+      backyard && "Backyard",
+      balcony && "Balcony",
+    ]
+      .filter(Boolean)
+      .join(", ");
+
+    const amenities = [
+      gym && "Gym",
+      parking && "Parking",
+      housekeeping && "Housekeeping",
+      elevator && "Elevator",
+      petFriendly && "Pet-Friendly",
+    ]
+      .filter(Boolean)
+      .join(", ");
+
+    let sql = "SELECT * FROM listings WHERE 1=1";
+    let values = [];
+
+    if (minPrice) {
+      sql += " AND price >= ?";
+      values.push(minPrice);
+    }
+    if (maxPrice) {
+      sql += " AND price <= ?";
+      values.push(maxPrice);
+    }
+    if (location) {
+      sql += " AND location = ?";
+      values.push(location);
+    }
+    if (property && property !== "any") {
+      sql += " AND property = ?";
+      values.push(property);
+    }
+    if (beds && beds !== 	"any") {
+      sql += " AND beds = ?";
+      values.push(beds);
+    }
+    if (garden) {
+      sql += " AND garden = ?";
+      values.push(garden);
+    }
+    if (swimming) {
+      sql += " AND swimming = ?";
+      values.push(swimming);
+    }
+    if (backyard) {
+      sql += " AND backyard = ?";
+      values.push(backyard);
+    }
+    if (balcony) {
+      sql += " AND balcony = ?";
+      values.push(balcony);
+    }
+    if (gym) {
+      sql += " AND gym = ?";
+      values.push(gym);
+    }
+    if (parking) {
+      sql += " AND parking = ?";
+      values.push(parking);
+    }
+    if (housekeeping) {
+      sql += " AND housekeeping = ?";
+      values.push(housekeeping);
+    }
+    if (elevator) {
+      sql += " AND elevator = ?";
+      values.push(elevator);
+    }
+    if (petFriendly) {
+      sql += " AND pet_friendly = ?";
+      values.push(petFriendly);
+    }
+    console.log(sql);
+console.log(values);
+
+    connection.query(sql, values, (err, result) => {
+      if (err) {
+        console.log(err);
+        
+        return res.status(500).render("500.ejs");
+      } else {
+        const message = result.length === 0 ? "No properties match the selected filters." : "";
+        res.render("listings.ejs", {
+          filtered: result,
+          outdoorFeatures: outdoorFeatures,
+          amenities: amenities,
+          listingImages: [],
+          message: message,
+        });
+      }
+    });
+  }
 });
 
 //contact route
 server.get("/contact", (req, res) => {
-  console.log("contact page");
   res.render("contact.ejs");
 });
 
@@ -121,7 +245,7 @@ server.post("/contact", (req, res) => {
   });
 });
 
-//signup get route representing the login and signup forms
+//signup get route representing the  signup form
 server.get("/signup", (req, res) => {
   res.render("signup.ejs");
 });
@@ -145,10 +269,10 @@ server.post("/signup", profile.single("profile"), (req, res) => {
 
   let sql = "";
   if (role === "agent") {
-    sql = `INSERT INTO agent (agents_id, fullname, email, contact, agency, password)
-           VALUES (${id}, "${fullname}", "${email}", "${contact}", "${agency}", "${hashedPassword}","${req.file.filename}")`;
+    sql = `INSERT INTO agent (agents_id, fullname, email, contact, password, agency,PROFILE)
+           VALUES (${id}, "${fullname}", "${email}", "${contact}","${hashedPassword}", "${agency}", "${req.file.filename}")`;
   } else if (role === "client") {
-    sql = `INSERT INTO client (client_id, fullname, email, contact, address, password)
+    sql = `INSERT INTO client (client_id, fullname, email, contact, address, password,PROFILE)
            VALUES (${id}, "${fullname}", "${email}", "${contact}", "${address}", "${hashedPassword}","${req.file.filename}")`;
   } else if (role === "owner") {
     sql = `INSERT INTO owner (owner_id, fullname, email, contact, address, businessname, password,PROFILE)
@@ -186,7 +310,7 @@ server.post("/login", express.urlencoded({ extended: true }), (req, res) => {
   const { loginemail, pass, role } = req.body;
 
   if (
-    loginemail ===process.env.ADMIN_EMAIL &&
+    loginemail === process.env.ADMIN_EMAIL &&
     pass === process.env.ADMIN_PASS &&
     role === "admin"
   ) {
@@ -246,40 +370,110 @@ server.get("/account", (req, res) => {
   } else res.render("admin.ejs");
 });
 
+//owner profile begin
 server.get("/profile", (req, res) => {
-  //selec
-  connection.query(
-    `select * from owner where owner_id = ${req.session.user.owner_id}`,
-    (err, data) => {
-      if (err) return res.status(500).render("500.ejs");
-      console.log(profile);
-      if (req.query.updateSuccess) {
-        res.render("profile.ejs", {
-          profile: data[0],
-          Updatesuccess: "Changes saved succesfully!!",
-        });
-      } else {
-        res.render("profile.ejs", { profile: data[0] });
+  if (req.session.role === "owner") {
+    connection.query(
+      `select * from owner where owner_id = ${req.session.user.owner_id}`,
+      (err, data) => {
+        if (err) return res.status(500).render("500.ejs");
+        console.log(profile);
+        if (req.query.updateSuccess) {
+          res.render("profile.ejs", {
+            profile: data[0],
+            Updatesuccess: "Changes saved succesfully!!",
+          });
+        } else {
+          res.render("profile.ejs", { profile: data[0] });
+        }
       }
-    }
-  );
+    );
+  } else if (req.session.role === "client") {
+    connection.query(
+      `select * from client where client_id = ${req.session.user.client_id}`,
+      (err, data) => {
+        if (err) return res.status(500).render("500.ejs");
+        console.log(profile);
+        if (req.query.updateSuccess) {
+          res.render("client-profile.ejs", {
+            profile: data[0],
+            Updatesuccess: "Changes saved succesfully!!",
+          });
+        } else {
+          res.render("client-profile.ejs", { profile: data[0] });
+        }
+      }
+    );
+  } else if (req.session.role === "agent") {
+    connection.query(
+      `select * from agent where agents_id = ${req.session.user.owner_id}`,
+      (err, data) => {
+        if (err) return res.status(500).render("500.ejs");
+        console.log(profile);
+        if (req.query.updateSuccess) {
+          res.render("agent.ejs", {
+            profile: data[0],
+            Updatesuccess: "Changes saved succesfully!!",
+          });
+        } else {
+          res.render("profile.ejs", { profile: data[0] });
+        }
+      }
+    );
+  } else {
+    res.status(404).send("Profile not found");
+  }
 });
 
-
-server.post("/update-profile",profile.single("profile"), (req, res) => {
+server.post("/update-profile", profile.single("profile"), (req, res) => {
   const { fullname, email, contact, address, businessname } = req.body;
-  const Updatesql = `UPDATE owner SET PROFILE=?,fullname = ?, email = ?, contact = ?, address = ?,businessname = ? WHERE owner_id = ?`;
-  const params = [
-    req.file.filename,
-    fullname,
-    email,
-    contact,
-    address,
-    businessname,
-    req.session.user.owner_id,
-  ];
+  let Updatesql = "";
+  let params = [];
+  //owner update profile section
+  if (req.file && req.session.role === "owner") {
+    Updatesql = `UPDATE owner SET PROFILE=?,fullname = ?, email = ?, contact = ?, address = ?,businessname = ? WHERE owner_id = ?`;
+    params = [
+      req.file.filename,
+      fullname,
+      email,
+      contact,
+      address,
+      businessname,
+      req.session.user.owner_id,
+    ];
+  } else if (req.file && req.session.role === "client") {
+    Updatesql = `UPDATE client SET PROFILE=?,fullname = ?, email = ?, contact = ?, address=? WHERE client_id = ?`;
+    params = [
+      req.file.filename,
+      fullname,
+      email,
+      contact,
+      address,
+      req.session.user.client_id,
+    ];
+  } else if (!req.file && req.session.role === "client") {
+    Updatesql = `UPDATE client SET fullname = ?, email = ?, contact = ?, address = ?  WHERE client_id = ?`;
+    params = [fullname, email, contact, address, req.session.user.client_id];
+  } else if (!req.file && req.session.role === "owner") {
+    Updatesql = `UPDATE owner SET fullname = ?, email = ?, contact = ?, address = ?,businessname = ? WHERE owner_id = ?`;
+    params = [
+      fullname,
+      email,
+      contact,
+      address,
+      businessname,
+      req.session.user.owner_id,
+    ];
+  } else {
+    return res.status(404).render("404.ejs");
+  }
+
+  //client update profile
+
   console.log("Session User:", req.session.user); // Check the session user
   connection.query(Updatesql, params, (err, data) => {
+    console.log(data);
+
     if (err) {
       return res.status(500).render("500.ejs");
     }
@@ -326,10 +520,10 @@ server.post("/addnewproperty", upload.array("uploadimages"), (req, res) => {
     pet_friendly,
   } = req.body;
 
-  const uploadimages = req.files.map((file) => file.path);
+  const uploadimages = req.files.map((file) => file.filename);
 
   const outdoorFeatures = [
-    garden && "Garden",
+    garden && "Garden", //If garden is true, the result of garden && "Garden" is "Garden".
     swimming && "Swimming",
     backyard && "Backyard",
     balcony && "Balcony",
@@ -361,7 +555,7 @@ server.post("/addnewproperty", upload.array("uploadimages"), (req, res) => {
     beds,
     outdoorFeatures,
     amenities,
-    uploadimages.join(", "),
+    uploadimages.join(","),
   ];
 
   console.log(values);
@@ -378,14 +572,25 @@ server.post("/addnewproperty", upload.array("uploadimages"), (req, res) => {
 server.get("/myproperties", (req, res) => {
   const ownersid = req.session.user.owner_id;
   const sql = `SELECT * FROM listings WHERE owner_id = ?`;
-  connection.query(sql,[ownersid] ,(err, results) => {
+
+  connection.query(sql, [ownersid], (err, results) => {
     if (err) {
       return res.status(500).render("500.ejs");
     } else {
-      res.render("myproperties.ejs", { results });
+      res.render("myproperties.ejs", { listings: results });
+      console.log(results);
     }
   });
 });
+
+//owner profile end
+
+//client account beginning
+server.get("/book", (req, res) => {
+  res.render("bookings.ejs");
+});
+
+server.post("/book", (req, res) => {});
 
 server.get("/logout", (req, res) => {
   req.session.destroy((err) => {

@@ -85,12 +85,12 @@
       }
 
       .sidenav a:hover {
-        background-color: #74512d; /* Background color on hover */
-        cursor: pointer; /* Change cursor to pointer */
+        background-color: #74512d;
+        cursor: pointer; 
       }
 
       .sidenav i {
-        font-size: 24px; /* Adjust icon size */
+        font-size: 24px; 
       }
 
       .sidenav span {
@@ -109,6 +109,111 @@
       .main-view img {
         width: 20%;
       }
+      /* my properties section */
+
+     /* Main container styling */
+/* Main container styling */
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f4e1;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #74512d;
+  margin-bottom: 10px;
+}
+
+.container p {
+  text-align: center;
+  color: #4e3627;
+  margin-bottom: 20px;
+}
+
+/* Property grid styling */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Individual property item */
+.property-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.property-item h2 {
+  font-size: 1.8rem;
+  color: #543310;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+/* Image grid styling */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.image-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.image-item img:hover {
+  transform: scale(1.05);
+}
+
+/* Property details */
+.property-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fefcf9;
+  border: 1px solid #af8f6f;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.details h3 {
+  font-size: 1rem;
+  color: #74512d;
+}
+
+.details span {
+  font-size: 1rem;
+  color: #4e3627;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
     </style>
     <!-- header section -->
     <header>
@@ -130,11 +235,13 @@
             <% } else { %>
             <img
               src="profilepic/<%=locals.user.PROFILE %>"
-              style="width: 80px;
-              height: 80px;
-              border-radius: 50%;
-              object-fit: cover;
-              text-align: center;"
+              style="
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+                text-align: center;
+              "
             />
             <% } %>
           </a>
@@ -206,17 +313,62 @@
       <!-- end of sidenav -->
 
       <section>
-        <div>
-          <% if (uploadimages && uploadimages.length > 0) { %>
-            <% uploadimages.forEach(function(image) { %>
-              <div>
-                <img src="<%= image %>" alt="Uploaded Image" style="width: 200px; height: auto;">
+        <div class="listings">
+          
+          <div class="container">
+            <h1>My Properties</h1>
+          <p>Here you can view all your properties</p>
+            <div class="property-grid">
+            <% listings.forEach(listing=>{ %>
+              <h2><%=listing.businessname%></h2>
+                <div class="image-grid">
+                <% listing.listingimages.split(",").forEach(filename=>{%>
+                  <div class="image-item">
+                <img src="/listingimages/<%=filename%>" style="width: 100%; height: 200px; object-fit: cover;"/>
               </div>
-            <% }); %>
-          <% } else { %>
-            <p>No images uploaded yet.</p>
-          <% } %>
-        </div>
+                <%})%>
+              </div>
+              
+                           
+              <div class="property-details">
+                
+                <div class="details">
+                  <h3> Property: </h3>
+                  <span><%= listing.property%></span>
+                </div>
+
+
+                <div class="details">
+              <h3> Location: </h3>
+              <span><%= listing.location%></span>
+            </div>
+
+            <div class="details">
+              <h3> Number of Bedrooms: </h3>
+              <span><%= listing.bedrooms%></span>
+            </div>
+
+            <div class="details">
+              <h3> Price: </h3>
+              <span><%= listing.price%></span>
+            </div>
+
+            <div class="details">
+              <h3> Outdoor Features: </h3>
+              <span><%= listing.outdoor%></span>
+            </div>
+
+            <div class="details">
+              <h3> Amenities: </h3>
+              <span><%= listing.amenities%></span>
+            </div>
+            
+            </div>
+              <% }) %>
+            </div>
+          </div>
+          
+          
       </section>
     </main>
   </body>

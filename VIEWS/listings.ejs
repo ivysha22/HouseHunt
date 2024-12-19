@@ -20,69 +20,66 @@
     <%- include('partials/header.ejs') %>
     <main>
       <div class="filter-container">
-        <i
-          class="fa-solid fa-filter"
-          style="
-            color: #4e3627;
-            display: flex;
-            gap: 10px;
-            margin-left: 50px;
-            margin-bottom: 20px;
-          "
-          >Search Filter</i
-        >
+        <div class="filter-buttons">
+        <i class="fa-solid fa-filter">Search Filter</i>
+        <a href="/listings">Clear Filters</a>
+        </div>
 
-        <form action="/listings" method="post">
+        <form action="/listings" method="get">
           <div class="price">
             <h2>Price</h2>
             <input
               type="number"
-              name="min-price"
+              name="minPrice"
               id="min-price"
               placeholder="min"
               class="maxmin"
             />
             <input
               type="number"
-              name="max-price"
+              name="maxPrice"
               id="max-price"
               placeholder="max"
               class="maxmin"
             />
-            
           </div>
-<div class="inputs">
-          <div class="location">
-            <h2>Location</h2>
-            <input type="text" name="location" id="location" placeholder="
-            794, Pioneer Eldoret" />
-          </div>
+          <div class="inputs">
+            <div class="location">
+              <h2>Location</h2>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                placeholder="
+            794, Pioneer Eldoret"
+              />
+            </div>
 
-          <div class="property">
-            <h2>Property Type</h2>
-            <select name="property" id="property">
-              <option value="any">Any</option>
-              <option value="studio">Studio</option>
-              <option value="house">House</option>
-              <option value="apartment">Apartment</option>
-              <option value="condo">Condo</option>
-              <option value="townhouse">Townhouse</option>
-            </select>
-          </div>
-          <!-- end of property type div -->
+            <div class="property">
+              <h2>Property Type</h2>
+              <select name="property" id="property">
+                <option value="any">Any</option>
+                <option value="studio">Studio</option>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
+                <option value="condo">Condo</option>
+                <option value="townhouse">Townhouse</option>
+              </select>
+            </div>
+            <!-- end of property type div -->
 
-          <div class="bedrooms">
-            <h2>Bedrooms</h2>
-            <select name="beds" id="beds">
-              <option value="any">Any</option>
-              <option value="bedsitter">Bedsitter</option>
-              <option value="one-bed">1-Bedroom</option>
-              <option value="two-bed">2-Bedroom</option>
-              <option value="three-bed">3-Bedroom</option>
-            </select>
+            <div class="bedrooms">
+              <h2>Bedrooms</h2>
+              <select name="beds" id="beds">
+                <option value="any">Any</option>
+                <option value="bedsitter">Bedsitter</option>
+                <option value="one-bed">1-Bedroom</option>
+                <option value="two-bed">2-Bedroom</option>
+                <option value="three-bed">3-Bedroom</option>
+              </select>
+            </div>
+            <!-- end of bedrooms div -->
           </div>
-          <!-- end of bedrooms div -->
-</div>
           <div class="outdoors">
             <h2>Outdoor Features</h2>
             <div class="outdoor">
@@ -129,12 +126,54 @@
             </div>
 
             <div class="amen">
-              <input type="checkbox" name="pet-friendly" id="pet-friendly" />
+              <input type="checkbox" name="petFriendly" id="petFriendly" />
               <p>Pet-Friendly</p>
             </div>
             <input type="submit" value="Apply" id="submit" />
           </div>
         </form>
+      </div>
+
+      <%let NoProperties=locals.message%> <% if (NoProperties) { %>
+      <div
+        style="
+          color: rgb(7, 7, 7);
+          font-weight: 700;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: large;
+          padding: 20px;
+          background-color: red;
+          text-align: center;
+          margin: 20px 30px;
+          height: 50px;
+        "
+      >
+        <%= NoProperties %>
+      </div>
+      <% }else{ %>
+      <div class="filtered-container">
+        <% filtered.forEach(item =>{%>
+        <div class="filtered-item">
+          <h2><%= item.businessname %></h2>
+          <p>Property:<%= item.property %></p>
+          <p>Price: <%= item.price %></p>
+          <p>Location: <%= item.location %></p>
+          <p>Features: <%= item.outdoorFeatures %></p>
+          <p>Amenities: <%= item.amenities %></p>
+          <div class="image-grid">
+            <% item.listingimages.split(",").forEach(image=>{%>
+            <div class="image-item">
+              <img
+                src="/listingimages/<%=image%>"
+                style="width: 100%; height: 200px; object-fit: cover"
+              />
+            </div>
+            <%})%>
+          </div>
+          <button class="contact_agent">Contact Agent</button>
+        </div>
+        <% }) %>
+        <%}%>
       </div>
     </main>
     <%- include('partials/footer.ejs') %>

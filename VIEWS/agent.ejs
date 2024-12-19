@@ -7,130 +7,126 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-    <%- include('partials/header.ejs') %>
-    <h1>Agent page</h1>
-    <%- include('partials/footer.ejs') %>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/owner.css" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      />
+    </head>
+    <body>
+      <!-- header section -->
+      <header>
+        <nav>
+          <img
+            src="/images/HouseHunt-removebg-preview.png"
+            alt=""
+            style="background-color: white; padding: 0 60px"
+          />
+          <div class="dashboardlist">
+            <a href="/" id="home">Home Page</a>
+            <a href="/account" id="dash">Dashboard</a>
+            <a href="/book" id="list">Check booked viewings</a>
+  
+            <a href="/profile">
+              <% if (!locals.user.PROFILE) { %>
+              <img src="/profilepic/avatarr.png" style="width: 80px" />
+              <% } else { %>
+              <img
+                src="profilepic/<%=locals.user.PROFILE %>"
+                style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  object-fit: cover;
+                  text-align: center;
+                "
+              />
+              <% } %>
+            </a>
+  
+            <div class="greetings">
+              <ul>
+                <li style="list-style: none; font-size: 1.5rem; color: black">
+                  Hi&nbsp;<%=locals.user.fullname %><i
+                    class="fa-regular fa-face-smile-beam"
+                    style="color: black; margin-left: 10px"
+                  ></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+  
+      <main>
+        <div class="sidenav">
+          <a href="/account">
+            <i class="fa-solid fa-chart-line" style="color: #000000"></i>
+            Dashboard
+          </a>
+  
+          <hr />
+  
+          <a href="/profile">
+            <p>
+              <% if (!locals.user.PROFILE) { %>
+              <img src="/profilepic/avatarr.png" style="width: 80px" />
+              <% } else { %>
+              <img
+                src="profilepic/<%=locals.user.PROFILE %>"
+                style="
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  object-fit: cover;
+                  text-align: center;
+                "
+              />
+              <% } %>
+            </p>
+            <span>Profile</span>
+          </a>
+  
+          <hr />
+  
+          <a href="/book">
+            <i class="fa-solid fa-location-dot" style="color: #000000"></i>
+            <span>Check booked viewings</span>
+          </a>
+  
+          <hr />
+  
+          
+  
+ 
+          <a href="/logout">
+            <i class="fa-solid fa-right-from-bracket" style="color: black"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+  
+        <section>
+          <div class="main-view">
+            <div id="dashboard">
+              <div id="dash-content">
+                <img src="images/littlekid.png" alt="" />
+                <div class="text">
+                  <h1>Welcome Back!!!!!</h1>
+                  <h2>Personalize your Dashboard</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </body>
+  </html>
+  
 </body>
-</html><!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/main.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header>
-      <nav class="logo">
-        <div class="image1">
-          <img src="/images/hh_logo-removebg-preview.png" alt="" />
-        </div>
-        <!-- househunt image logo -->
-
-        <div class="links">
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <a href="/listings">Listings</a>
-          <a href="/contact">Contact Us</a>
-          <%if(locals.isLoggedIn){%>
-          <div class="greetings">
-            <ul>
-              <li>
-                Hi&nbsp;<%=locals.user.fullname %><i
-                  class="fa-regular fa-face-smile-beam"
-                  style="color: #ffffff"
-                ></i>
-              </li>
-            </ul>
-          </div>
-          <a href="/account">Account</a>
-          <a href="/logout">Logout</a>
-          <%}else{%>
-          <a href="/signup" class="cta-link" id="black">Get Started</a>
-          <%}%>
-        </div>
-      </nav>
-    </header>
-
-    <style>
-      .greetings li {
-        color: white;
-        font-size: 20px;
-        align-items: center;
-        border: white 3px solid;
-        padding: 20px;
-        display: flex;
-        flex-direction: row;
-      }
-    </style>
-
-    <main>
-      <h1>Client Page</h1>
-    </main>
-
-    <footer>
-      <div class="footer-child">
-        <div class="image1">
-          <img src="/images/hh_logo-removebg-preview.png" alt="" />
-        </div>
-        <div class="links">
-          <div class="foot">
-            <a href="/">Home</a>
-            <ul>
-              <li>Popular Listings</li>
-              <li>Why choose Us?</li>
-            </ul>
-          </div>
-
-          <div class="foot">
-            <a href="/about">About Us</a>
-            <ul>
-              <li>Mission</li>
-              <li>Vision</li>
-              <li>How it works</li>
-            </ul>
-          </div>
-
-          <div class="foot">
-            <a href="/listings">Listings</a>
-            <ul>
-              <li>Filtered Listings</li>
-            </ul>
-          </div>
-
-          <div class="foot">
-            <a href="/contact">Contact Us</a>
-            <ul class="foot-socials">
-              <li>
-                <a href="/https://x.com" target="_blank"
-                  ><i class="fa-brands fa-x-twitter"></i
-                ></a>
-              </li>
-              <li>
-                <a href="/https://facebook.com" target="_blank"
-                  ><i class="fa-brands fa-facebook-f"></i
-                ></a>
-              </li>
-              <li>
-                <a href="/https://instagram.com" target="_blank"
-                  ><i class="fa-brands fa-instagram"></i
-                ></a>
-              </li>
-              <li>
-                <a href="/https://linkedLn.com" target="_blank"
-                  ><i class="fa-brands fa-linkedin-in"></i
-                ></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- links div end -->
-      </div>
-      <!-- footer-child div end -->
-      <p class="reserved">&copy; 2024 HouseHunt.All rights reserved.</p>
-    </footer>
-  </body>
 </html>
+

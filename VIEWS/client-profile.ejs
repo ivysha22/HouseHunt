@@ -186,8 +186,8 @@
         <div class="dashboardlist">
           <a href="/" id="home">Home Page</a>
           <a href="/account" id="dash">Dashboard</a>
-          <a href="/addnewproperty" id="list">Add New Property</a>
-          <a href="/myproperties" id="list">My Properties</a>
+          <a href="/book" id="list">Book A Viewing</a>
+          <a href="/saved" id="list">Saved Properties</a>
 
           <a href="/profile">
             <% if (!locals.user.PROFILE) { %>
@@ -251,16 +251,16 @@
 
         <hr />
 
-        <a href="/addnewproperty">
-          <i class="fa-solid fa-plus" style="color: black"></i>
-          <span>Add New Property</span>
+        <a href="/book">
+          <i class="fa-solid fa-location-dot" style="color: #000000"></i>
+          <span>Book a viewing</span>
         </a>
 
         <hr />
 
-        <a href="/myproperties">
-          <i class="fa-solid fa-boxes-stacked" style="color: black"></i>
-          <span>My Properties</span>
+        <a href="/saved">
+          <i class="fa-solid fa-star" style="color: #000000"></i>
+          <span>Saved Properties</span>
         </a>
 
         <hr />
@@ -284,23 +284,15 @@
               id="profile-form"
               enctype="multipart/form-data"
             >
-            
-              <%let Updatesuccess=locals.Updatesuccess%>
-               <% if (Updatesuccess) {
+              <%let Updatesuccess=locals.Updatesuccess%> <% if (Updatesuccess) {
               %>
               <div
                 style="
-                  color: rgb(7, 7, 7);
-                  font-weight: 700;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size: large;
-                  padding: 20px;
-                  background-color: green;
+                  color: rgb(36, 218, 36);
                   text-align: center;
-                  margin: 20px 30px;
-                  width: 80%;
+                  margin-top: 20px;
                 "
-              id="successMessage" class="success-message">
+              >
                 <%= Updatesuccess %>
               </div>
               <% } %>
@@ -362,34 +354,11 @@
                 />
               </div>
 
-              <div class="profile-group">
-                <p>Business Name:</p>
-                <input
-                  type="text"
-                  name="businessname"
-                  id="businessname"
-                  value="<%= locals.profile.businessname %>"
-                />
-              </div>
-
               <button type="submit" id="save-button">Save Changes</button>
             </form>
           </div>
         </div>
       </section>
     </main>
-    <script>
-      // Automatically hide the success message after 5 seconds
-      setTimeout(() => {
-        const successMessage = document.getElementById('successMessage');
-        if (successMessage) {
-          successMessage.style.opacity = '0';
-          successMessage.style.transition = 'opacity 1s ease-in-out';
-    
-          // Remove the element from DOM after transition
-          setTimeout(() => successMessage.remove(), 1000);
-        }
-      }, 5000); // 5-second delay
-    </script>
   </body>
 </html>
