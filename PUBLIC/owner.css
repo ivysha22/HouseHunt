@@ -73,6 +73,7 @@ header img {
 .sidenav a:hover {
   background-color: #74512d; /* Background color on hover */
   cursor: pointer; /* Change cursor to pointer */
+  color: white;
 }
 
 .sidenav i {
